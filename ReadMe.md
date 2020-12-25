@@ -7,3 +7,6 @@ And less correlated to last years revenue `Revenue YoY`
 
 <img src="./images/correlation-map.png" width="1000">
 
+No correlation between `News Count` and `stock price` for Neflix
+
+<img src="./images/news_correlation_for_nflx.png" width="1000">
