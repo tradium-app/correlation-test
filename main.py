@@ -8,20 +8,10 @@ import matplotlib.pyplot as plt
 plt.style.use('./plot.mplstyle')
 # %% read data
 
-
-def strip_percentage(series):
-    return series.str.rstrip('%')
-
-
 df = pd.read_csv("./data/portfolio.csv")
+
 df.replace(to_replace="-", value="0", inplace=True)
-df['Revenue YoY'] = strip_percentage(df['Revenue YoY'])
-df['Insider %'] = strip_percentage(df['Insider %'])
-df['Last Price Vs. 50D SMA'] = strip_percentage(df['Last Price Vs. 50D SMA'])
-df['Revenue FWD'] = strip_percentage(df['Revenue FWD'])
-df['6M Perf'] = strip_percentage(df['6M Perf'])
-df['YTD Perf'] = strip_percentage(df['YTD Perf'])
-df['1M Perf'] = strip_percentage(df['1M Perf'])
+df.replace(to_replace="%", value="", inplace=True, regex=True)
 
 df1 = df.iloc[:, 1:].astype("float")
 
@@ -29,7 +19,6 @@ df1 = df.iloc[:, 1:].astype("float")
 scaler = MinMaxScaler(feature_range=(0, 1))
 scaled_array = scaler.fit_transform(df1)
 
-type(scaled_array)
 
 final_df = pd.DataFrame(scaled_array, index=df1.index, columns=df1.columns)
 
